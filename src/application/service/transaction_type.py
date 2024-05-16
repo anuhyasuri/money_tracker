@@ -1,12 +1,9 @@
 from model.transaction_type import TransactionType
 from schema.transaction_type_schema import TransactionTypeSchema
 from index import db
-from datetime import datetime
+from datetime import datetime, timezone
 
 class TransactionTypeService():
-
-	def __init__(self) -> None:
-		pass
 
 	def get_all():
 		transaction_types = TransactionType.get_all()
@@ -29,7 +26,7 @@ class TransactionTypeService():
 	def update(id, data):
 		transactiontype_to_update = TransactionType.get_by_id(id=id, cls=TransactionType)
 		transactiontype_to_update.name = data.get("name")
-		transactiontype_to_update.updated_date = datetime.now(datetime.UTC)
+		transactiontype_to_update.updated_date = datetime.now(timezone.utc)
 		db.session.commit()
 		serializer = TransactionTypeSchema()
 		return serializer.dump(transactiontype_to_update)

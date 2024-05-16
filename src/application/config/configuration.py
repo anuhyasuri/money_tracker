@@ -1,4 +1,4 @@
 from config.db_configuration import DBConfiguration
 
 def db_config():
-    return DBConfiguration("localhost", "postgres", "12345", "money_tracker")
+    return DBConfiguration("<DB_HOST>", "<DB_USER>", "<DB_PWD>", "<DB_NAME>")

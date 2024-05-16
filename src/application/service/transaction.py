@@ -1,12 +1,9 @@
 from model.transaction import Transaction
 from schema.transaction_schema import TransactionSchema
 from index import db
-from datetime import datetime
+from datetime import datetime, timezone
 
 class TransactionService():
-
-	def __init__(self) -> None:
-		pass
 
 	def get_all():
 		transactions = Transaction.get_all()
@@ -36,7 +33,7 @@ class TransactionService():
 			transaction_to_update.type = data.get("type")
 		if data.get("amount") != None:
 			transaction_to_update.amount = data.get("amount")
-		transaction_to_update.updated_date = datetime.now(datetime.UTC)
+		transaction_to_update.updated_date = datetime.now(timezone.utc)
 		db.session.commit()
 		serializer = TransactionSchema()
 		return serializer.dump(transaction_to_update)

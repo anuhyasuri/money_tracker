@@ -4,9 +4,8 @@ from datetime import datetime
 class TransactionType(db.Model):
 	id = db.Column(db.Integer(),primary_key=True)
 	name = db.Column(db.String(255),nullable=False)
-	created_date = db.Column(default = datetime.now(datetime.UTC), nullable = False)
-	updated_date = db.Column(default = datetime.now(datetime.UTC), nullable = False)
-
+	created_date = db.Column(db.DateTime(timezone=True), default = datetime.now(), nullable = False)
+	updated_date = db.Column(db.DateTime(timezone=True), default = datetime.now(), nullable = False)
 
 	def __repr__(self):
 		return self.name
@@ -25,4 +24,3 @@ class TransactionType(db.Model):
 	def delete(self):
 		db.session.delete(self)
 		db.session.commit()
-

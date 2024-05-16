@@ -6,8 +6,8 @@ class Transaction(db.Model):
 	name = db.Column(db.String(255),nullable=False)
 	type = db.Column(db.Integer(), db.ForeignKey('transaction_type.id'), nullable=False)
 	amount = db.Column(db.Float())
-	created_date = db.Column(default = datetime.now(datetime.UTC), nullable = False)
-	updated_date = db.Column(default = datetime.now(datetime.UTC), nullable = False)
+	created_date = db.Column(db.DateTime(timezone=True), default = datetime.now(), nullable = False)
+	updated_date = db.Column(db.DateTime(timezone=True), default = datetime.now(), nullable = False)
 
 	def __repr__(self):
 		return self.name

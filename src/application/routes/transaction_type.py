@@ -1,30 +1,20 @@
-from flask_restful import Resource, Api
-from index import application
+from flask_restful import Resource
 from service.transaction_type import TransactionTypeService
-from flask import jsonify, request
-
-api = Api(application)
+from flask import request
 
 class TransactionTypeRoute(Resource):
-	def get(id):	
+	def get(self, id):
 		data = TransactionTypeService.get(id)
-		return jsonify(data), 200
-	def get_all():
-		data = TransactionTypeService.get_all()
-		return jsonify(data)
-	def post():
-		data = request.get_json()
-		updated_data = TransactionTypeService.save(data)
-		return jsonify(updated_data), 201
-	def put(id):
+		return data, 200
+	
+	def put(self, id):
 		data = request.get_json()
 		updated_data = TransactionTypeService.update(id, data)
-		return jsonify(updated_data), 200
-	def delete(id):
+		return updated_data, 200
+	
+	def delete(self, id):
 		result = TransactionTypeService.delete(id)
 		if result == True:
-			return jsonify({"message":"Deleted"}), 204
+			return {"message":"Deleted"}, 204
 		else:
-			return jsonify({"message":"There is a problem"}), 500
-		
-api.add_resource(TransactionTypeRoute, '/transaction_type','/transaction_type/<string:id>')
+			return {"message":"There is a problem"}, 500

@@ -8,6 +8,3 @@ application.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql://' + db_configurati
 application.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(application)
 application.app_context().push()
-	
-if __name__ == "__main__":
-	application.run(debug=True)
